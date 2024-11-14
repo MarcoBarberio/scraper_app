@@ -13,12 +13,13 @@ class Scraper(Scraper_interface):
     # funzione che restituisce il plain text di una pagina
     def get_data(self, url):
         page_data={
-            "plain text":"",
+            "plain_text":"",
             "response_code":0
         }
 
         self._search(url,page_data)
-    
+        return page_data
+
     #funzione che effettua lo scraping per la pagina
     def _search(self, url, data_dict):
         # si usa requests per ottenere il response code di http per la pagina
@@ -29,9 +30,15 @@ class Scraper(Scraper_interface):
             return
         driver=self._get_driver()     
         driver.get(url)   
-        # si salva in data_dict il contenuto della pagina
-        data_dict["plain text"]=driver.page_source
+        page_data=""
+        # ricerca nei paragrafi
+        paragraphs=driver.find_elements(By.TAG_NAME,"p")
+        for paragraph in paragraphs:
+            page_data+=paragraph.text+" "
+        data_dict["plain_text"]=page_data
         
+        
+    
     #funzione che restituisce il driver di selenium
     def _get_driver(self):
         options = Options()
