@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Query from a web page</title>
+    </head>
+    <body>
+        <h1> Search an info in a web page</h1>
+            <label for="url">Url:</label>
+            <input type="text" id="url" placeholder="https/example.com" required> <br>
+            <label for="query">What to search:</label>
+            <input type="text" id="query" placeholder="info to search" required> <br>
+            
+            <button onclick="execute()">Search</button>
+        <h2 id="result_title">
+           
+        </h2>
+        <p id="result">
+        </p>
+        <script>
+            function execute() {
+
+                const url = $('#url').val();
+                const query = $('#query').val();
+                $.ajax({
+                    url: '/search',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ url: url, query: query }),
+                    success: function(response) {
+                        $('#result').text(response.result);
+                    },
+                    error: function() {
+                        $('#result').text('Errore durante l’esecuzione della ricerca.');
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>

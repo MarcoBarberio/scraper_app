@@ -23,8 +23,11 @@ class Scraper(Scraper_interface):
     #funzione che effettua lo scraping per la pagina
     def _search(self, url, data_dict):
         # si usa requests per ottenere il response code di http per la pagina
-        response=requests.get(url)
-        data_dict["response_code"]=response.status_code
+        try:
+            response=requests.get(url)
+            data_dict["response_code"]=response.status_code
+        except requests.exceptions.MissingSchema:
+            return
         # se il response code è diverso da 200 il caricamento della pagina non è andato a buon fine
         if response.status_code!=200:
             return
