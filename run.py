@@ -1,8 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 from script.scraper.scraper import Scraper
 from script.text_generator.text_generation import Text_generator
-import google.generativeai as gemini
-import os
 app = Flask(__name__)
 
 @app.route('/')
@@ -28,6 +26,7 @@ def search():
                            "you have to respond to the query using only informations that you can find on the text\n"+
                            "the text begins and finishes with [TXT] placeholder\n"+
                            "the query begins and finishes with [QUERY] placeholder\n"+
+                           "give me a response without placeholders\n"+
                            "[TXT]"+text+"[TXT]\n"+
                            "[QUERY]"+query+"[QUERY]")
     return jsonify({"result":result.text})

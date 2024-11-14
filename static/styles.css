@@ -1,7 +1,7 @@
 /* Aggiunge uno stile di base alla pagina */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color: #8ecae6;
     margin: 0;
     padding: 0;
     display: flex;
@@ -27,7 +27,7 @@ h2 {
 
 /* Aggiusta il risultato della ricerca */
 #result {
-    color: #27ae60;
+    color: #023047;
     font-size: 1.2rem;
     font-weight: bold;
     margin-top: 20px;
