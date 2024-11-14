@@ -36,7 +36,7 @@ class Scraper(Scraper_interface):
         for paragraph in paragraphs:
             page_data+=paragraph.text+" "
         data_dict["plain_text"]=page_data
-        
+        driver.quit()
         
     
     #funzione che restituisce il driver di selenium
