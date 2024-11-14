@@ -21,6 +21,7 @@ class Text_generator(Text_generator_interface):
         prompt=self._clean_text(prompt)
         return self.model.generate_content(prompt)
     
+    # ripulisce il testo derivato dallo scraping
     def _clean_text(self,text):
         text = re.sub(r'\s+', ' ', text)
         text = text.strip()

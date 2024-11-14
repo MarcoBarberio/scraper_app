@@ -1,4 +1,3 @@
-/* Aggiunge uno stile di base alla pagina */
 body {
     font-family: Arial, sans-serif;
     background-color: #8ecae6;
@@ -11,21 +10,18 @@ body {
     height: 100vh;
 }
 
-/* Titolo principale */
 h1 {
     color: #2c3e50;
     font-size: 2.5rem;
     margin-bottom: 20px;
 }
 
-/* Titoli secondari */
 h2 {
     color: #3498db;
     font-size: 2rem;
     margin-top: 30px;
 }
 
-/* Aggiusta il risultato della ricerca */
 #result {
     color: #023047;
     font-size: 1.2rem;
@@ -33,7 +29,7 @@ h2 {
     margin-top: 20px;
 }
 
-/* Aggiusta lo stile degli input */
+
 input[type="text"] {
     width: 300px;
     padding: 10px;
@@ -43,7 +39,6 @@ input[type="text"] {
     font-size: 1rem;
 }
 
-/* Bottone con un aspetto più elegante */
 button {
     padding: 10px 20px;
     background-color: #3498db;
@@ -55,19 +50,17 @@ button {
     transition: background-color 0.3s;
 }
 
-/* Cambia il colore del bottone al passaggio del mouse */
+
 button:hover {
     background-color: #2980b9;
 }
 
-/* Etichette per gli input */
 label {
     font-size: 1.1rem;
     color: #2c3e50;
     margin-right: 10px;
 }
 
-/* Spaziatura tra gli elementi */
 br {
     margin-bottom: 15px;
 }
