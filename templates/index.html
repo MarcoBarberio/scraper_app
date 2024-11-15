@@ -13,15 +13,16 @@
             <input type="text" id="url" placeholder="https/example.com" required> <br>
             
             <label for="depth">Depth:</label>
-            <input type="text" id="depth" placeholder="0" required> <br>
+            <input type="text" id="depth" placeholder="0" min="1" required> <br>
             
             <label for="query">What to search:</label>
             <input type="text" id="query" placeholder="info to search" required> <br>
             
             <button onclick="execute()">Search</button>
-        <h2 id="result_title">
-           
-        </h2>
+        
+        <h2 id="loading" style="display: none;"></div>
+        
+        <h2 id="result_title"></h2>
         <p id="result">
         </p>
         <script>
@@ -32,6 +33,9 @@
                 const url = $("#url").val();
                 const depth = $("#depth").val()
                 const query = $("#query").val();
+                
+                // mostra la rotellina che gira
+                $("#loading").show();
                 // ajax serve per inviare dati al server
                 $.ajax({
                     // url a cui inviare la post
@@ -47,6 +51,10 @@
                     error: function() {
                         // ciò che viene eseguito in caso di errore
                         $("#result").text("Error during the search execution");
+                    },
+                    complete: function() {
+                        // Nasconde la rotellina che gira
+                        $("#loading").hide();
                     }
                 });
             }

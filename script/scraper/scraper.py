@@ -40,7 +40,7 @@ class Scraper(Scraper_interface):
         #ricerca dei link nella pagina
         redirect_links=driver.find_elements(By.TAG_NAME,"a")
         for link in redirect_links:
-            href=link.get("href")
+            href=link.get_attribute("href")
             #href contiene solo link relativi. Si ricostruisce il link assoluto
             full_url = urljoin(url, href)
             #si controlla se il link effettua un redirect verso la stessa pagina. Nel caso viene scartato

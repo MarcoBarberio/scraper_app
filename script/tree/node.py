@@ -19,17 +19,7 @@ class NodeInterface(ABC):
         # Riferimento al nodo padre
         pass
     
-    @property
-    @abstractmethod
-    def resource_name(self):
-        # Nome della pagina o del file senza estensione
-        pass
 
-    @property
-    @abstractmethod
-    def similarity(self):
-        # Grado di similarità con i bilanci di similarità
-        pass
 
     @abstractmethod
     def to_string(self):

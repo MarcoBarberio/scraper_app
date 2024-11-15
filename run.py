@@ -16,14 +16,14 @@ def search():
     # url da cui prendere informazioni
     url=data["url"]
     # profondità massima per prendere informazioni
-    depth=data["depth"]
+    depth=int(data["depth"])
     #query da domandare all'ai
     query=data["query"]
     crawler=Crawler() 
     pages_data=crawler.crawl(url,depth)
     #pages_data è un array contenente i dati delle pagine trovate
     #in text vengono inserite tutte le informazioni delle pagine separate da \n
-    text = "\n".join1(pages_data)
+    text = "\n".join(pages_data)
 
     if not text:
         return jsonify({"result": "No text found on the page."})

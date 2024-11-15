@@ -21,7 +21,7 @@ def worker(max_depth,visited_url,url_queue,result_queue,lock):
         #restituisce tutti i link raggiungibili dalla pagina corrente
         links=scraper.get_data(node.url) 
         #se lo status code non è 200 c'è stato un errore nel reperimento di una pagina
-        if links["status_code"]!=200: 
+        if links["response_code"]!=200: 
             url_queue.task_done()
             continue
         for link in links["redirect_links"]:
@@ -30,9 +30,8 @@ def worker(max_depth,visited_url,url_queue,result_queue,lock):
                 if link in visited_url: 
                     continue
                 visited_url.add(link)
-                
-            resource_name=get_resource_name(link)           
-            new_node=URL_node(link,node.depth+1,node,resource_name)
+                         
+            new_node=URL_node(link,node.depth+1,node)
             url_queue.put(new_node)
         # i risultati dello scraping vengono messi nel rispettivo array
         for data in links["plain_text"]:

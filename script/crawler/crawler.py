@@ -1,5 +1,5 @@
 from .crawler_interface import Crawler_interface
-from ..utilities import get_resource_name,is_valid_url
+from ..utilities import is_valid_url
 from ..tree.URL_node import URL_node
 from queue import Queue
 import threading
@@ -14,7 +14,6 @@ class Crawler(Crawler_interface):
         if not is_valid_url(root_url):
             return
         
-        root_resource_name=get_resource_name(root_url)
         root=URL_node(root_url,0,None)
         #Coda che contiene le pagine web da cui prendere le informazioni. Queue è threadsafe
         url_queue=Queue() 
@@ -27,7 +26,7 @@ class Crawler(Crawler_interface):
         threads=[]
         
         for i in range(self._n_threads):
-            thread=threading.Thread(target=worker,args=(max_depth,visited_url,visited_file,url_queue,result_queue,lock))
+            thread=threading.Thread(target=worker,args=(max_depth,visited_url,url_queue,result_queue,lock))
             #ogni thread naviga una pagina e ne estrae i link
             thread.start()
             threads.append(thread)

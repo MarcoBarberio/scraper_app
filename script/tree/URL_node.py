@@ -2,7 +2,7 @@ from .node import NodeInterface
 
 # Nodo che contiene le informazioni di un file
 class URL_node(NodeInterface):
-    def __init__(self, url, depth, father, resource_name, similarity):
+    def __init__(self, url, depth, father):
         self.__url = url
         self.__depth = depth
         self.__father = father
