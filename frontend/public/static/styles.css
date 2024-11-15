@@ -1,10 +1,10 @@
-/* Corpo della pagina */
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #e3f2fd; /* Background light blue per l'intera pagina */
-    color: #333; /* Colore di testo di default */
+    background-color: #e3f2fd; 
+    color: #333; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,50 +12,49 @@ body {
     flex-direction: column;
 }
 
-/* Stilizzazione del contenitore principale */
+
 div {
     max-width: 600px;
     margin: 20px;
     padding: 20px;
-    background-color: #e0f7fa; /* Light blue background */
+    background-color: #e0f7fa;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Titolo */
 h1 {
     text-align: center;
     font-family: Arial, sans-serif;
     font-size: 24px;
-    color: #0277bd; /* Blue for the heading */
+    color: #0277bd; 
     margin-bottom: 20px;
 }
 
-/* Etichetta dei campi */
+
 label {
     font-family: Arial, sans-serif;
     font-size: 16px;
-    color: #0288d1; /* A lighter blue */
+    color: #0288d1; 
     margin-top: 10px;
     display: block;
 }
 
-/* Campo di input */
+
 input {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
     margin-bottom: 10px;
-    border: 1px solid #0288d1; /* Border in blue */
+    border: 1px solid #0288d1;
     border-radius: 4px;
     font-size: 16px;
     box-sizing: border-box;
-    background-color: #ffffff; /* White background for inputs */
+    background-color: #ffffff; 
 }
 
-/* Bottone di ricerca */
+
 button {
-    background-color: #03a9f4; /* Light blue */
+    background-color: #03a9f4; 
     color: white;
     padding: 10px 15px;
     border: none;
@@ -67,27 +66,37 @@ button {
 }
 
 button:hover {
-    background-color: #039be5; /* Darker blue on hover */
+    background-color: #039be5; 
 }
 
-/* Messaggi di risposta */
-h2 {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    font-size: 18px;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 20px;
-}
 
-/* Classe per messaggio di successo */
+
+
 .success {
-    background-color: #b2fab4; /* Light green for success */
-    color: #388e3c; /* Dark green text */
+    background-color: #ffffff; 
+    color: #81c784; 
 }
 
-/* Classe per messaggio di errore */
 .error {
-    background-color: #f8bbd0; /* Light pink for error */
-    color: #d32f2f; /* Red text */
+    background-color: #ffffff; 
+    color: #d32f2f; 
+}
+
+
+#loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db; 
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

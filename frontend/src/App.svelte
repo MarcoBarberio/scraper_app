@@ -6,8 +6,11 @@
     let query = "";
     let responseMsg = "";
     let responseClass=""
+    let loading=false
     async function sendPost() {
+        responseMsg=""
         const data = { url, depth, query };
+        loading=true
         try {
             const response = await fetch('/search', {
                 method: 'POST',
@@ -16,7 +19,7 @@
                 },
                 body: JSON.stringify(data)
             });
-
+            
             if (response.ok) {
                 let responseData= await response.json()
                 responseMsg = responseData.result;
@@ -29,6 +32,7 @@
             responseMsg = "Error during the search execution";
             responseClass="error"
         }
+        loading=false
     }
 </script>
 
@@ -45,7 +49,9 @@
     <button on:click={sendPost}>Search</button>
 </div>
 
-
+{#if loading}
+    <div id=loading></div>
+{/if}
 {#if responseMsg}
-    <h2 class={responseClass}>{responseMsg}</h2>
+    <div class={responseClass}>{responseMsg}</div>
 {/if}
