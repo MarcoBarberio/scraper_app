@@ -19,9 +19,11 @@ def worker(max_depth,visited_url,url_queue,result_queue,lock):
             url_queue.task_done()
             continue
         #restituisce tutti i link raggiungibili dalla pagina corrente
+        print(node.url)
         links=scraper.get_data(node.url) 
         #se lo status code non è 200 c'è stato un errore nel reperimento di una pagina
-        if links["response_code"]!=200: 
+        #se lo status code è 403 forse ci sono informazioni prese con selenium
+        if links["response_code"] not in [200, 403]:
             url_queue.task_done()
             continue
         for link in links["redirect_links"]:

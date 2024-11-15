@@ -21,13 +21,12 @@ class Crawler(Crawler_interface):
         #Array di file che contengono preferibilmente bilanci di sosteniblità
         result_queue=[] 
         visited_url=set()
-        visited_file=set()
         lock=threading.Lock()
         threads=[]
         
         for i in range(self._n_threads):
             thread=threading.Thread(target=worker,args=(max_depth,visited_url,url_queue,result_queue,lock))
-            #ogni thread naviga una pagina e ne estrae i link
+            #ogni thread naviga le pagine e ne estrae i link
             thread.start()
             threads.append(thread)
         url_queue.join()
