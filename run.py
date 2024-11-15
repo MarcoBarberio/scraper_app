@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-from script.scraper.scraper import Scraper
+from script.crawler.crawler import Crawler
 from script.text_generator.text_generation import Text_generator
 app = Flask(__name__)
 
@@ -15,20 +15,20 @@ def search():
     data=request.get_json()
     # url da cui prendere informazioni
     url=data["url"]
+    # profondità massima per prendere informazioni
+    depth=data["depth"]
     #query da domandare all'ai
     query=data["query"]
-    scraper=Scraper()
-    page_data=scraper.get_data(url)
-    #page_data è un dizionario contenente i dati della pagina e il codice di risposta della pagina
-    # se il codice  di risposta è diverso da 200 c'è stato un qualche problema nello scraping
-    if page_data["response_code"]!=200:
-        return jsonify({"result":"Error during the search execution"})
-    #in text vengono immagazinati i dati della pagina o niente di default (se c'è qualche problema) 
-    text = page_data.get("plain_text", "")
+    crawler=Crawler() 
+    pages_data=crawler.crawl(url,depth)
+    #pages_data è un array contenente i dati delle pagine trovate
+    #in text vengono inserite tutte le informazioni delle pagine separate da \n
+    text = "\n".join1(pages_data)
 
     if not text:
         return jsonify({"result": "No text found on the page."})
     
+    return jsonify({"result":text})
     generator=Text_generator()
     #query da fare all'ai
     result=generator.query("I will give you a text followed by a query.\n"+

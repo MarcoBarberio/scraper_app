@@ -4,6 +4,8 @@ from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import requests
+from ..utilities import get_domain
+from urllib.parse import urljoin
 #data una pagina web restituisce il contenuto della pagina
 class Scraper(Scraper_interface):
     
@@ -14,6 +16,7 @@ class Scraper(Scraper_interface):
     def get_data(self, url):
         page_data={
             "plain_text":"",
+            "redirect_links":[],
             "response_code":0
         }
 
@@ -22,6 +25,7 @@ class Scraper(Scraper_interface):
 
     #funzione che effettua lo scraping per la pagina
     def _search(self, url, data_dict):
+        domain=get_domain(url)
         # si usa requests per ottenere il response code di http per la pagina
         try:
             response=requests.get(url)
@@ -33,6 +37,20 @@ class Scraper(Scraper_interface):
             return
         driver=self._get_driver()     
         driver.get(url)   
+        #ricerca dei link nella pagina
+        redirect_links=driver.find_elements(By.TAG_NAME,"a")
+        for link in redirect_links:
+            href=link.get("href")
+            #href contiene solo link relativi. Si ricostruisce il link assoluto
+            full_url = urljoin(url, href)
+            #si controlla se il link effettua un redirect verso la stessa pagina. Nel caso viene scartato
+            if full_url == url:
+                continue      
+            #si controlla se il link appartiene allo stesso dominio del padre, altrimenti si scartya
+            full_url_domain = get_domain(full_url)
+            if full_url_domain != domain:
+                continue
+            data_dict["redirect_links"].append(full_url)
         page_data=""
         # ricerca nei paragrafi
         paragraphs=driver.find_elements(By.TAG_NAME,"p")

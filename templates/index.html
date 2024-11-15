@@ -11,6 +11,10 @@
         <h1> Search an info in a web page</h1>
             <label for="url">Url:</label>
             <input type="text" id="url" placeholder="https/example.com" required> <br>
+            
+            <label for="depth">Depth:</label>
+            <input type="text" id="depth" placeholder="0" required> <br>
+            
             <label for="query">What to search:</label>
             <input type="text" id="query" placeholder="info to search" required> <br>
             
@@ -26,6 +30,7 @@
             function execute() {
 
                 const url = $("#url").val();
+                const depth = $("#depth").val()
                 const query = $("#query").val();
                 // ajax serve per inviare dati al server
                 $.ajax({
@@ -34,7 +39,7 @@
                     type: "POST",
                     // i dati vengono inviati in formato json
                     contentType: "application/json",
-                    data: JSON.stringify({ url: url, query: query }),
+                    data: JSON.stringify({ url: url, depth: depth, query: query }),
                     success: function(response) {
                         // ciò che viene eseguito in caso di successo
                         $("#result").text(response.result);
