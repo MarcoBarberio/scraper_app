@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from script.crawler.crawler import Crawler
 from script.text_generator.text_generation import Text_generator
 from script.utilities import is_valid_url
-app = Flask(__name__)
+app = Flask(__name__,static_folder="../frontend/public")
 
 #quando si tira su il sito viene visualizzata questa pagina
 @app.route('/')
@@ -35,7 +35,6 @@ def search():
     if not text:
         return jsonify({"result": "No text found on the page."})
     
-    return jsonify({"result":text})
     generator=Text_generator()
     #query da fare all'ai
     result=generator.query("I will give you a text followed by a query.\n"+
