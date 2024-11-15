@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from script.crawler.crawler import Crawler
 from script.text_generator.text_generation import Text_generator
+from script.utilities import is_valid_url
 app = Flask(__name__)
 
 #quando si tira su il sito viene visualizzata questa pagina
@@ -15,10 +16,16 @@ def search():
     data=request.get_json()
     # url da cui prendere informazioni
     url=data["url"]
+    if not is_valid_url(url):
+        return jsonify({"result": "Please enter a valid URL (e.g., https://example.com).\n"})   
     # profondità massima per prendere informazioni
     depth=int(data["depth"])
+    if depth is None or depth<1:
+        return jsonify({"result": "Please enter a valid numeric value for depth (>= 1).\n"})        
     #query da domandare all'ai
     query=data["query"]
+    if len(query) <3 or len(query) >50:
+        return jsonify({"result": "The search query must be between 3 and 50 characters long.\n"}) 
     crawler=Crawler() 
     pages_data=crawler.crawl(url,depth)
     #pages_data è un array contenente i dati delle pagine trovate
