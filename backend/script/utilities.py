@@ -6,7 +6,7 @@ import os
 load_dotenv()
 #si accede ad ogni pagina con un user agent diverso per evitare problemi di ban
 def get_random_user_agent(): 
-    user_agents = os.getenv("USER_AGENTS")
+    user_agents = os.getenv("USER_AGENTS").split("-")
     return random.choice(user_agents)
 
 def get_domain(url):
